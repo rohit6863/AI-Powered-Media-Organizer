@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Guide | AI Media Organizer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/guide">My Guide</a></li>
+        </ul>
+        <div class="nav-actions">
+            <a href="/" style="text-decoration: none;">
+                <div class="btn-wrapper">
+                    <div class="btn">&larr; Back to App</div>
+                </div>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Guide Content -->
+    <main class="guide-section">
+        <h1>Project Guide & Summary</h1>
+        
+        <section class="guide-card">
+            <h2>How to Use This App</h2>
+            <ol>
+                <li><strong>Prepare your files:</strong> Gather the messy images (screenshots, memes, documents, etc.) you want to organize into a single folder on your computer.</li>
+                <li><strong>Upload:</strong> Click the <em>"Upload & Sort Magic"</em> button on the home page and select your folder.</li>
+                <li><strong>Let AI work:</strong> The AI will analyze the visual features of every single image in real-time. Please be patient, as this requires heavy computation!</li>
+                <li><strong>Download:</strong> Once finished, the app will automatically download a clean <code>.zip</code> file containing your newly categorized folders.</li>
+            </ol>
+        </section>
+
+        <section class="guide-card">
+            <h2>About the AIML Project</h2>
+            <p>This application is the culmination of an Artificial Intelligence and Machine Learning (AIML) project designed to solve a real-world problem: digital clutter.</p>
+            
+            <h3>The Architecture</h3>
+            <ul>
+                <li><strong>Feature Extraction:</strong> We use OpenAI's state-of-the-art <strong>CLIP (Contrastive Language-Image Pretraining)</strong> Vision Transformer to "look" at the images and convert their visual features into a dense mathematical vector.</li>
+                <li><strong>Classification:</strong> A custom-trained <strong>Logistic Regression</strong> machine learning model takes those vectors and maps them into 7 distinct categories (e.g., <em>id_cards, docs_and_notes, screenshots, memes</em>).</li>
+                <li><strong>Web Backend:</strong> A Python Flask server connects the raw ML inference pipeline to a beautiful, interactive web interface.</li>
+            </ul>
+
+            <h3>Tackling Dataset Bias</h3>
+            <p>During development, we encountered and solved real-world ML problems such as <em>Overlapping Decision Boundaries</em> and <em>Class Ambiguity</em>. For example, the model initially confused Bank Passbooks with ID Cards, and Web UIs with Text Documents. Through a technique called <strong>Hard Negative Mining</strong> (feeding the AI its exact mistakes), we fine-tuned the training dataset to achieve a robust final accuracy of <strong>90.00%</strong>.</p>
+        </section>
+    </main>
+
+    <!-- Illustrations as Background Layer -->
+    <div class="illustration-container" style="opacity: 0.3;">
+        <img src="{{ url_for('static', filename='images/hero.png') }}" alt="Landscape Illustration" class="hero-illustration">
+    </div>
+
+</body>
+</html>

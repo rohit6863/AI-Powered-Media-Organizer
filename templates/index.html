@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Media Organizer</title>
+    <!-- Google Fonts for Elegant Typography -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" class="logo"></a>
+        </div>
+        <ul class="nav-links">
+            <li><a href="/guide">My Guide</a></li>
+        </ul>
+        <div class="nav-actions">
+            <!-- 3D/2D Button trick using wrapper -->
+            <label for="folderInput" class="btn-wrapper">
+                <div class="btn">Sort a folder &rarr;</div>
+            </label>
+        </div>
+    </nav>
+
+    <!-- Main Hero Section -->
+    <main class="hero-section">
+        <h1 class="hero-title">An AI roadmap<br>for your messy files.</h1>
+        <p class="hero-subtitle">File organization is a journey. Take it with confidence using AI.</p>
+        
+        <!-- Upload Form -->
+        <form id="uploadForm" action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" id="folderInput" name="files" webkitdirectory directory multiple required style="display: none;">
+            
+            <label for="folderInput" class="btn-wrapper" id="submitBtn">
+                <div class="btn">Upload & Sort Magic &rarr;</div>
+            </label>
+        </form>
+
+        <div id="loadingMessage" class="hidden">
+            <p><strong>✨ AI is analyzing and sorting your files...</strong><br>Please wait, this may take a few moments!</p>
+        </div>
+
+        <!-- Hero Illustration -->
+        <div class="illustration-container">
+            <img src="{{ url_for('static', filename='images/hero.png') }}" alt="Landscape Illustration" class="hero-illustration">
+            <img src="{{ url_for('static', filename='images/accent.png') }}" alt="Accent Balloon" class="accent-illustration">
+        </div>
+    </main>
+
+    <script>
+        // Form submission loading logic
+        const folderInput = document.getElementById('folderInput');
+        const uploadForm = document.getElementById('uploadForm');
+        const loadingMessage = document.getElementById('loadingMessage');
+        const submitBtn = document.getElementById('submitBtn');
+
+        // Automatically submit when a folder is selected
+        folderInput.addEventListener('change', () => {
+            if (folderInput.files.length > 0) {
+                submitBtn.style.display = 'none';
+                loadingMessage.style.display = 'block';
+                uploadForm.submit();
+            }
+        });
+    </script>
+</body>
+</html>

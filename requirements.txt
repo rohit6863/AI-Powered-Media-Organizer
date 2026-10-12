@@ -1,0 +1,9 @@
+Flask==3.0.0
+torch
+torchvision
+transformers
+pillow
+scikit-learn
+joblib
+numpy
+gunicorn

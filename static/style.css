@@ -1,0 +1,252 @@
+/* Global Reset & Basic Setup */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #F9F6F0; /* Off-white cream from the reference */
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    overflow-x: hidden;
+}
+
+/* Typography */
+h1, h2, h3 {
+    font-family: 'Playfair Display', serif;
+}
+
+/* Navigation */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+}
+
+.logo-container .logo {
+    height: 100px;
+    object-fit: contain;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #000;
+    font-size: 15px;
+    font-weight: 600;
+    border: 1.5px solid #000;
+    padding: 8px 20px;
+    border-radius: 50px; /* Pill shape */
+    transition: all 0.2s ease;
+    background: transparent;
+}
+
+.nav-links a:hover {
+    background-color: #000;
+    color: #F9F6F0;
+    box-shadow: 2px 2px 0px rgba(0,0,0,0.2);
+    transform: translateY(-2px);
+}
+
+/* Button Magic (Neumorphism / Pencil Sketch 3D to 2D effect) */
+.btn-wrapper {
+    position: relative;
+    display: inline-block;
+    /* Use the exact pencil sketch texture uploaded by user */
+    background: url('images/pencil_sketch.png'); 
+    background-size: cover;
+    border-radius: 50px;
+    cursor: pointer;
+    /* Extra subtle border behind the button */
+    border: 1px solid #333;
+}
+
+.btn {
+    background-color: #63D2B8; /* Teal color */
+    border: 2px solid #000;
+    border-radius: 50px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    color: #000;
+    
+    /* Move the top button up and left to reveal the wrapper background (shadow) */
+    transform: translate(-6px, -6px);
+    transition: transform 0.1s cubic-bezier(0, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* When the wrapper is clicked, move the button down to 0,0 */
+.btn-wrapper:active .btn {
+    transform: translate(0px, 0px);
+}
+
+/* Hero Section */
+.hero-section {
+    text-align: center;
+    padding-top: 40px; 
+    position: relative; 
+    min-height: calc(100vh - 140px); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 1;
+}
+
+/* Create a soft "cloud" of cream color purely behind the text to ensure perfect readability 
+   without cutting off any part of your illustration! */
+.hero-section::before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 1000px;
+    height: 400px;
+    background: radial-gradient(ellipse closest-side, #F9F6F0 40%, rgba(249, 246, 240, 0.85) 70%, transparent 100%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-title {
+    font-size: 5rem;
+    line-height: 1.1;
+    font-weight: 400;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-subtitle {
+    font-size: 1.2rem;
+    margin-bottom: 40px;
+    position: relative;
+    z-index: 2;
+}
+
+#uploadForm {
+    position: relative;
+    z-index: 2;
+}
+
+/* Illustrations as Background Layer (NO MASK, FULL IMAGE!) */
+.illustration-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; 
+    pointer-events: none; 
+    z-index: 0; /* Behind the text cloud */
+    overflow: hidden;
+}
+
+.hero-illustration {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    min-width: 1200px;
+    mix-blend-mode: multiply; 
+}
+
+.accent-illustration {
+    position: absolute;
+    width: 150px;
+    top: 5%; 
+    left: 10%;
+    mix-blend-mode: multiply;
+    animation: float 6s ease-in-out infinite;
+    z-index: 0;
+}
+
+/* Floating Animation for the balloon */
+@keyframes float {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-15px); }
+    100% { transform: translateY(0px); }
+}
+
+/* Loading Message */
+.hidden {
+    display: none;
+}
+
+#loadingMessage {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #333;
+    padding: 20px;
+    background: #E8F5F2;
+    border: 2px solid #63D2B8;
+    border-radius: 10px;
+    display: inline-block;
+    position: relative;
+    z-index: 2; /* Force it above the background illustration! */
+}
+
+/* --- Guide Page Styles --- */
+.guide-section {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 20px;
+    position: relative;
+    z-index: 2;
+}
+
+.guide-section h1 {
+    font-size: 3.5rem;
+    margin-bottom: 40px;
+    text-align: center;
+    text-shadow: 0 0 20px #F9F6F0, 0 0 40px #F9F6F0;
+}
+
+.guide-card {
+    background: rgba(249, 246, 240, 0.90);
+    backdrop-filter: blur(10px);
+    border: 2px solid #333;
+    border-radius: 20px;
+    padding: 40px;
+    margin-bottom: 40px;
+    box-shadow: 8px 8px 0px rgba(0,0,0,0.1);
+    text-align: left;
+}
+
+.guide-card h2 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.guide-card h3 {
+    font-size: 1.5rem;
+    margin-top: 30px;
+    margin-bottom: 15px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+}
+
+.guide-card p, .guide-card li {
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.guide-card ul, .guide-card ol {
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
